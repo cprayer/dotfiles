@@ -1,0 +1,32 @@
+call plug#begin()
+
+" Color
+Plug 'tomasr/molokai'
+Plug 'chriskempson/vim-tomorrow-theme'
+Plug 'morhetz/gruvbox'
+  let g:gruvbox_contrast_dark = 'soft'
+Plug 'yuttie/hydrangea-vim'
+Plug 'tyrannicaltoucan/vim-deep-space'
+Plug 'AlessandroYorba/Despacio'
+Plug 'cocopon/iceberg.vim'
+Plug 'w0ng/vim-hybrid'
+Plug 'nightsense/snow'
+Plug 'nightsense/stellarized'
+Plug 'arcticicestudio/nord-vim'
+Plug 'nightsense/cosmic_latte'
+
+" Edit
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+  map  gc  <Plug>Commentary
+  nmap gcc <Plug>CommentaryLine
+call plug#end()
+
+let mapleader = " "
+
+set showmode
+set so=5
+set incsearch
+set nu
+set autoindent
+set smartindent
