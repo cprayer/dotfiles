@@ -1,0 +1,14 @@
+let mapleader = " "
+
+set surround
+set commentary
+set ReplaceWithRegister
+
+map <leader>d <Action>(Debug)
+map <leader>r <Action>(Run)
+map <leader>s <Action>(Stop)
+
+set showmode
+set so=5
+set incsearch
+set nu
