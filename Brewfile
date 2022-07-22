@@ -3,7 +3,6 @@ tap "homebrew/cask"
 # brew install
 brew "git"
 brew "fzf"
-brew "jenv"
 brew "chezmoi"
 brew "watch"
 brew "jq"
