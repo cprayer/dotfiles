@@ -1,0 +1,5 @@
+[user]
+	name = cprayer
+	email = cprayer13@gmail.com
+[credential]
+	helper = osxkeychain
