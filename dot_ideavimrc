@@ -8,6 +8,9 @@ map <leader>d <Action>(Debug)
 map <leader>r <Action>(Run)
 map <leader>s <Action>(Stop)
 
+nmap <C-o> :action Back<CR>
+nmap <C-i> :action Forward<CR>
+
 set showmode
 set so=5
 set incsearch
