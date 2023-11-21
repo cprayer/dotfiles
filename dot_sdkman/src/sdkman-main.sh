@@ -16,6 +16,14 @@
 #   limitations under the License.
 #
 
+function ___sdkman_help() {
+	if [[ -f "$SDKMAN_DIR/libexec/help" ]]; then
+		"$SDKMAN_DIR/libexec/help"
+	else
+		__sdk_help
+	fi
+}
+
 function sdk() {
 
 	COMMAND="$1"
@@ -49,9 +57,6 @@ function sdk() {
 	d)
 		COMMAND="default"
 		;;
-	b)
-		COMMAND="broadcast"
-		;;
 	h)
 		COMMAND="home"
 		;;
@@ -59,16 +64,6 @@ function sdk() {
 		COMMAND="env"
 		;;
 	esac
-
-	if [[ "$COMMAND" == "home" ]]; then
-		__sdk_home "$QUALIFIER" "$3"
-		return $?
-	fi
-
-	# Left here for legacy purposes, issue #912 on Github
-	if [[ "$COMMAND" == "completion" ]]; then
-		return 0
-	fi
 
 	#
 	# Various sanity checks and default settings
@@ -78,8 +73,6 @@ function sdk() {
 	if [[ "$COMMAND" != "update" ]]; then
 		___sdkman_check_candidates_cache "$SDKMAN_CANDIDATES_CACHE" || return 1
 	fi
-	# Check version cache
-	___sdkman_check_version_cache
 
 	# Always presume internet availability
 	SDKMAN_AVAILABLE="true"
@@ -88,7 +81,7 @@ function sdk() {
 	fi
 
 	# ...unless proven otherwise
-	__sdkman_update_broadcast_and_service_availability
+	__sdkman_update_service_availability
 
 	# Load the sdkman config if it exists.
 	if [ -f "${SDKMAN_DIR}/etc/config" ]; then
@@ -97,7 +90,7 @@ function sdk() {
 
 	# no command provided
 	if [[ -z "$COMMAND" ]]; then
-		__sdk_help
+		___sdkman_help
 		return 1
 	fi
 
@@ -121,15 +114,7 @@ function sdk() {
 		echo ""
 		__sdkman_echo_red "Invalid command: $COMMAND"
 		echo ""
-		__sdk_help
-	fi
-
-	# Check whether the candidate exists
-	local sdkman_valid_candidate=$(echo ${SDKMAN_CANDIDATES[@]} | grep -w "$QUALIFIER")
-	if [[ -n "$QUALIFIER" && "$COMMAND" != "help" && "$COMMAND" != "offline" && "$COMMAND" != "flush" && "$COMMAND" != "selfupdate" && "$COMMAND" != "env" && "$COMMAND" != "completion" && "$COMMAND" != "edit" && -z "$sdkman_valid_candidate" ]]; then
-		echo ""
-		__sdkman_echo_red "Stop! $QUALIFIER is not a valid candidate."
-		return 1
+		___sdkman_help
 	fi
 
 	# Validate offline qualifier
@@ -144,31 +129,24 @@ function sdk() {
 	# Native commands found under libexec
 	local native_command="${SDKMAN_DIR}/libexec/${COMMAND}"
 	
-	# Internal commands use underscores rather than hyphens
-	local converted_command_name=$(echo "$COMMAND" | tr '-' '_')
-
 	if [ -f "$native_command" ]; then
-		# Available as native command
-		if [ -z "$QUALIFIER" ]; then
-			"$native_command"
-		elif [ -z "$3" ]; then
-			"$native_command" "$QUALIFIER"
-		elif [ -z "$4" ]; then
-			"$native_command" "$QUALIFIER" "$3"
-		else
-			"$native_command" "$QUALIFIER" "$3" "$4"
-		fi
-		final_rc=$?
+		"$native_command" "${@:2}"
 
 	elif [ -n "$CMD_FOUND" ]; then
-		# Available as a shell function
-		__sdk_"$converted_command_name" "$QUALIFIER" "$3" "$4"
-		final_rc=$?
-	fi
 
-	# Attempt upgrade after all is done
-	if [[ "$COMMAND" != "selfupdate" && "$sdkman_selfupdate_feature" == "true" && "$sdkman_auto_update" == "true" ]]; then
-		__sdkman_auto_update "$SDKMAN_REMOTE_VERSION" "$SDKMAN_VERSION"
+		# Check whether the candidate exists
+		if [[ -n "$QUALIFIER" && "$COMMAND" != "help" && "$COMMAND" != "offline" && "$COMMAND" != "flush" && "$COMMAND" != "selfupdate" && "$COMMAND" != "env" && "$COMMAND" != "completion" && "$COMMAND" != "edit" && "$COMMAND" != "home" && -z $(echo ${SDKMAN_CANDIDATES[@]} | grep -w "$QUALIFIER") ]]; then
+			echo ""
+			__sdkman_echo_red "Stop! $QUALIFIER is not a valid candidate."
+			return 1
+		fi
+
+		# Internal commands use underscores rather than hyphens
+		local converted_command_name=$(echo "$COMMAND" | tr '-' '_')
+
+		# Available as a shell function
+		__sdk_"$converted_command_name" "${@:2}"
 	fi
+	final_rc=$?
 	return $final_rc
 }
