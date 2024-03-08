@@ -2,7 +2,9 @@ tap "homebrew/cask"
 tap "mongodb/brew"
 
 # brew install
+brew "bat"
 brew "git"
+brew "git-delta"
 brew "fzf"
 brew "chezmoi"
 brew "watch"
@@ -15,6 +17,8 @@ brew "k9s"
 brew "kubectl"
 brew "kubectx"
 brew "awscli"
+brew "ghz"
+brew "nvm"
 brew "mongodb-community"
 
 brew "zsh"
