@@ -7,6 +7,7 @@ set ReplaceWithRegister
 map <leader>i <Action>(QuickImplementations)
 map <leader>j <Action>(QuickJavaDoc)
 map <leader>r <Action>(Run)
+map <leader>t <Action>(RunContextConfiguration)
 map <leader>d <Action>(Debug)
 map <leader>s <Action>(Stop)
 

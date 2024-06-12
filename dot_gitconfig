@@ -1,5 +1,23 @@
 [user]
 	name = cprayer
 	email = cprayer13@gmail.com
+        # signingkey = signingkey
 [credential]
-	helper = osxkeychain
+        helper = osxkeychain
+[commit]
+        # gpgsign = true
+[gpg]
+        program = gpg
+[core]
+        # hooksPath = /Users/ian.shin/.git/hooks
+        autocrlf = input
+        pager = delta
+[include]
+        # path = /Users/ian.shin/.delta.themes.gitconfig
+[delta]
+    features = gruvbox-dark decorations
+[delta "decorations"]
+        commit-decoration-style = bold white ul
+        file-style = bold white ul
+        file-decoration-style = none
+        hunk-header-decoration-style = white box

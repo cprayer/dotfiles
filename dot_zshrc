@@ -106,6 +106,9 @@ if type brew &>/dev/null; then
   compinit
 fi
 
+# bash
+touch ~/.bashrc
+
 # fzf.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -119,3 +122,16 @@ PROMPT='$(kube_ps1)'$PROMPT
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+GPG_TTY=$(tty)
+export GPG_TTY
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
