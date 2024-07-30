@@ -3,10 +3,8 @@ export PATH=/opt/homebrew/bin:$PATH
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
-source /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /opt/homebrew/share/zsh-you-should-use/you-should-use.plugin.zsh
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,

@@ -26,10 +26,8 @@ brew "mongodb-community"
 brew "protolint"
 
 brew "zsh"
-brew "zsh-completions"
 brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
-brew "zsh-you-should-use"
 
 # brew install --cask
 cask "iterm2"
