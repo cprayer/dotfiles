@@ -9,8 +9,8 @@
 [gpg]
         program = gpg
 [core]
-        # hooksPath = /Users/ian.shin/.git/hooks
-        autocrlf = input
+	autocrlf = input
+	eol = lf
         pager = delta
 [include]
         # path = /Users/ian.shin/.delta.themes.gitconfig
