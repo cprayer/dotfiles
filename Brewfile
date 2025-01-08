@@ -24,6 +24,7 @@ brew "ghz"
 brew "gawk"
 brew "mongodb-community"
 brew "protolint"
+brew "avro-tools"
 
 brew "zsh"
 brew "zsh-autosuggestions"
