@@ -1,0 +1,60 @@
+model_reasoning_effort = "xhigh"
+approval_policy = "on-request"
+approvals_reviewer = "auto_review"
+sandbox_mode = "workspace-write"
+
+[mcp_servers.notion]
+url = "https://mcp.notion.com/mcp"
+
+[mcp_servers.datadog]
+url = "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp"
+
+[mcp_servers.google-calendar]
+command = "npx"
+args = ["@cocal/google-calendar-mcp"]
+
+[mcp_servers.github]
+command = "docker"
+args = [
+    "run",
+    "-i",
+    "--rm",
+    "-e",
+    "GITHUB_PERSONAL_ACCESS_TOKEN",
+    "ghcr.io/github/github-mcp-server",
+]
+
+[shell_environment_policy]
+inherit = "core"
+
+[marketplaces.claude-plugins-official]
+source_type = "git"
+source = "https://github.com/anthropics/claude-plugins-official.git"
+
+[marketplaces.openai-codex]
+source_type = "git"
+source = "https://github.com/openai/codex-plugin-cc.git"
+
+[plugins."code-review@claude-plugins-official"]
+enabled = true
+
+[plugins."context7@claude-plugins-official"]
+enabled = true
+
+[plugins."kotlin-lsp@claude-plugins-official"]
+enabled = true
+
+[plugins."ralph-loop@claude-plugins-official"]
+enabled = true
+
+[plugins."security-guidance@claude-plugins-official"]
+enabled = true
+
+[plugins."slack@claude-plugins-official"]
+enabled = true
+
+[plugins."typescript-lsp@claude-plugins-official"]
+enabled = true
+
+[plugins."codex@openai-codex"]
+enabled = true

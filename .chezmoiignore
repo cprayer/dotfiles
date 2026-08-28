@@ -1,0 +1,6 @@
+# Reference copies of tool configuration published for sharing only.
+# They are NOT applied to the home directory — the live configs under
+# ~/.claude and ~/.codex hold machine-local secrets and must not be
+# overwritten by the sanitized copies kept here.
+claude-code
+codex
