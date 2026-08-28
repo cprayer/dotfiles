@@ -13,7 +13,7 @@
 	eol = lf
         pager = delta
 [include]
-        # path = /Users/ian.shin/.delta.themes.gitconfig
+        # path = ~/.delta.themes.gitconfig
 [delta]
     features = gruvbox-dark decorations
 [delta "decorations"]
@@ -21,3 +21,6 @@
         file-style = bold white ul
         file-decoration-style = none
         hunk-header-decoration-style = white box
+[include]
+        # 머신 로컬 identity·자격증명. 이 repo 에는 올리지 않는다
+        path = ~/.gitconfig.local
