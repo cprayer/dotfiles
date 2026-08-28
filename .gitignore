@@ -1,3 +1,7 @@
 dot_sdkman/candidates/**
 dot_sdkman/tmp/**
 dot_sdkman/var/metadata/**
+
+__pycache__/
+*.pyc
+.DS_Store
